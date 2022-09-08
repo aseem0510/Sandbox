@@ -1,0 +1,159 @@
+body {
+   margin: 0;
+   font-family: 'Open Sans', sans-serif;
+   font-family: 'Source Sans Pro', sans-serif;
+ }
+ .navbar {
+  padding: 30px;
+ }
+ p {
+  font-size: 16px;
+ }
+ h4 {
+  font-weight: 200;
+ }
+ .nav-item {
+  padding: 10px;
+ }
+ .welcome {
+  text-align: center;
+  align-items: center;
+ }
+ nav [aria-current=page] {
+  border-bottom: 0.25rem solid #188ef4;
+ }
+ .id {
+   margin-top: 20px;
+ }
+ .man {
+  width: 60%;
+  margin-left: 60px;
+ }
+ #hero {
+  padding: 3% 10% 7%;
+ }
+ .content {
+  padding: 10% 5%;
+  align-items: center;
+  align-content: center;
+ }
+ #features {
+  padding: 3% 10% 7%;
+ }
+ .span4 {
+  margin: 30px;
+  padding: 20px;
+ }
+ .span4 img {
+  width: 200px;
+  margin-right: 60px;
+}
+.span4 .img-left {
+  float: left;
+}
+.span4 .content-heading {
+  margin-top: 20px;
+}
+ .response {
+   padding-top: 80px;
+ }
+ .logo {
+  width: 160px;
+ }
+ .intro {
+  text-align: center;
+  justify-content: center;
+  padding: 30px 10px 10px;
+ }
+ .register-form {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+ }
+ .form-group {
+  margin: 0;
+  padding: 10px;
+  vertical-align: middle;
+ }
+ .form-group .btn {
+  padding: 3% 30%;
+ }
+ input {
+  padding: 3% 6%;
+ }
+ .btn {
+  margin-top: 0 10px;
+ }
+ .row {
+  padding-bottom: 20px;
+ }
+ .upload {
+  padding: 10px;
+ }
+ .service-6 {
+   font-family: 'Opensans', sans-serif;
+   color: #8d97ad;
+   font-weight: 300;
+ }
+ 
+ .service-6 h1, .service-6 h2, .service-6 h3, .service-6 h4, .service-6 h5, .service-6 h6 {
+   color: #ffffff;
+ }
+ 
+ .service-6 .font-weight-medium {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+ }
+ 
+ .service-6 .subtitle {
+     color: #ffffff;
+     font-size: 32px;
+ }
+ 
+ .service-6 a {
+    text-decoration: none;	
+ }
+ 
+ .service-6 .wrap-service6-box {
+   -webkit-transition: 0.2s ease-in;
+   -o-transition: 0.2s ease-in;
+   transition: 0.2s ease-in;
+ }
+ .service-6 .wrap-service6-box .card {
+  width: 320px;
+  height: 240px;
+  border-radius: 16px;
+}
+ .service-6 .wrap-service6-box .card-body {
+   padding: 30px;
+}
+ 
+ .service-6 .wrap-service6-box .card-body p {
+  font-family: 'Opensans', sans-serif;
+  font-size: 16px;
+  font-stretch: expanded;
+  opacity: 0.8;
+ }
+ 
+ .service-6 .wrap-service6-box:hover {
+   -webkit-transform: scale(1.1);
+   -ms-transform: scale(1.1);
+   transform: scale(1.1);
+ }
+ 
+ .service-6 .bg-info-gradiant {
+       background: #188ef4;
+     background: -webkit-linear-gradient(legacy-direction(to right), #188ef4 0%, #316ce8 100%);
+     background: -webkit-gradient(linear, left top, right top, from(#188ef4), to(#316ce8));
+     background: -webkit-linear-gradient(left, #188ef4 0%, #316ce8 100%);
+     background: -o-linear-gradient(left, #188ef4 0%, #316ce8 100%);
+     background: linear-gradient(to right, #188ef4 0%, #316ce8 100%);
+ }
+ 
+ 
+ .footer {
+  width: 100%;
+  margin: 10px;
+ }

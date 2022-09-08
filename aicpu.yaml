@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sandboxui
+spec:
+  selector:
+    matchLabels:
+      app: sandboxui
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: sandboxui
+    spec:
+      containers:
+      - name: sandboxui
+        image: 445350681542.dkr.ecr.us-west-2.amazonaws.com/cogai-awsrepo:spoofdetcpu8_v10
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+            - name: data
+              mountPath: /root/logs/
+
+      volumes:
+        - name: data
+          hostPath:
+            path: "/root/logs/"
+
+      nodeSelector:
+        disktype: facematch1

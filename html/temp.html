@@ -1,0 +1,3747 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  /* background-color: black; */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+  text-align: center;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 30%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  /* text-align: center; */
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+  /* text-align: center; */
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+  width: 50%;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  /* width: 100%; */
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  /* background-color: #f1f1f1; */
+  text-align: center;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+
+</style>
+
+</style>
+        
+<script type="text/javascript">
+  function submitForm() {
+      var formElement = document.getElementById('myForm');
+      var data = new FormData(formElement);
+  
+      fetch('/register_data/', {
+            method: 'POST',
+            body: data,
+          })
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById("response_area").innerHTML = data;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+  }
+  </script>
+
+
+
+</head>
+<body>
+
+  {% if response %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{response}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+
+{% endif %}
+
+
+
+<form method="post" action="/register_data/" id="myForm">
+  <div class="container">
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+
+    <label for="text" style="text-align: center;"><b>First Name</b></label><br>
+    <input type="text" placeholder="Enter First Name" name="f_name" required><br>
+
+    <label for="text" style="text-align: center;"><b>Last Name</b></label><br>
+    <input type="text" placeholder="Enter Last Name" name="l_name" required><br>
+
+    <label for="text" style="text-align: center;"><b>Username</b></label><br>
+    <input type="text" placeholder="Enter Username" name="username" required><br>
+
+    <label for="email" style="text-align: center;"><b>Email</b></label><br>
+    <input type="text" placeholder="Enter Email" name="email" required><br>
+
+    <label for="text" style="text-align: center;"><b>Company Name</b></label><br>
+    <input type="text" placeholder="Enter Company Name" name="company_name" required><br>
+
+    <!-- <hr> -->
+    <!-- <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p> -->
+
+    <!-- <button type="submit" class="registerbtn" onclick="submitForm()">Register</button> -->
+    <!-- <input type="button" class="button" value="Register" onclick="submitForm()"> -->
+    <button type="submit" class="button">Register</button>
+  </div>
+  
+  <div class="container signin">
+    <p>Already have an account? <a href="/login/">Sign in</a></p>
+  </div>
+</form>
+<hr>
+
+<div id="response_area" style="text-align: center; background-color: #f1f1f1;"></div>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  /* background-color: black; */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+  text-align: center;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 30%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  /* text-align: center; */
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+  /* text-align: center; */
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+  width: 50%;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  /* width: 100%; */
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  /* background-color: #f1f1f1; */
+  text-align: center;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+</style>
+
+</style>
+        
+<script type="text/javascript">
+  function submitForm() {
+      var formElement = document.getElementById('myForm');
+      var data = new FormData(formElement);
+  
+      fetch('/login_data/', {
+            method: 'POST',
+            body: data,
+          })
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById("response_area").innerHTML = data;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+  }
+  </script>
+
+
+
+</head>
+<body>
+
+<form method="post" action="/login_data/" id="myForm">
+  <div class="container">
+    <h1>Sign In</h1>
+    <p>Please fill your credentials to sign in to your account.</p>
+    <hr>
+
+    <label for="text" style="text-align: center;"><b>Access Key</b></label><br>
+    <input type="text" placeholder="Enter Access Key" name="access_key" required><br>
+
+    <!-- <label for="text" style="text-align: center;"><b>Access Key</b></label><br>
+    <input type="text" placeholder="Enter Access Key" name="access_key" required><br>
+     -->
+
+    <!-- <hr> -->
+    <!-- <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p> -->
+
+    <!-- <button type="submit" class="registerbtn">Sign-In</button> -->
+    <!-- <input type="button" class="button" value="Sign-In" onclick="submitForm()"> -->
+    <button type="submit" class="button">Sign-In</button>
+  </div>
+  
+  <div class="container signin">
+    <p>Don't have an account? <a href="/register/">Sign Up</a></p>
+  </div>
+</form>
+<hr>
+
+<div id="response_area" style="text-align: center; background-color: #f1f1f1;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+        <title>EM Sandbox</title>
+        <style>
+            body {
+              margin: 0;
+              font-family: "Lato", sans-serif;
+            }
+            
+            .sidebar {
+              margin: 0;
+              padding: 0;
+              width: 200px;
+              background-color: #f1f1f1;
+              position: fixed;
+              height: 100%;
+              overflow: auto;
+            }
+            
+            .sidebar a {
+              display: block;
+              color: black;
+              padding: 16px;
+              text-decoration: none;
+            }
+             
+            .sidebar a.active {
+              background-color: #04AA6D;
+              color: white;
+            }
+            
+            .sidebar a:hover:not(.active) {
+              background-color: #555;
+              color: white;
+            }
+            
+            div.content {
+              margin-left: 200px;
+              padding: 1px 16px;
+              height: 1000px;
+            }
+            
+            @media screen and (max-width: 700px) {
+              .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+              }
+              .sidebar a {float: left;}
+              div.content {margin-left: 0;}
+            }
+            
+            @media screen and (max-width: 400px) {
+              .sidebar a {
+                text-align: center;
+                float: none;
+              }
+            }
+
+            /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+      
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+
+
+    .topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.topnav-left {
+  float: left;
+}
+
+/* .topnav-centered a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+.topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+
+    position: relative;
+  }
+
+  .topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-centered a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.topnav-right {
+  float: right;
+}
+
+/* Responsive navigation menu (for mobile devices) */
+@media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+  
+  .topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+}
+
+
+
+
+div.content {
+  margin-left: 0px;
+  padding: 10px 16px;
+  height: 1000px;
+}
+
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 0px;
+  margin-left: 0px;
+  width: initial;
+}
+
+.col-sm-2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.col-sm-10 {
+    word-break: break-all;
+}
+
+input[type="file"] {
+  display: inline-flex;
+}
+
+
+
+            </style>
+
+    </head>
+
+    <body>
+<!-- 
+        <div class="topnav">
+
+            <div class="topnav-left">
+                <a href="/home/">EigenMaps.AI</a>
+              </div>
+              
+              <div class="topnav-centered">
+                <a href="/home/">EM Sandbox</a>
+              </div>
+              
+
+            
+            <div class="topnav-right">
+              <a href="#login">Hello, XYZ</a>
+            </div>
+
+
+        </div> -->
+
+        <!-- <div class="topnav">
+
+          
+            <div class="topnav-centered">
+              <a href="/home/">EM Sandbox</a>
+            </div>
+            
+    
+            <a><img src="{{ url_for('static', path='eigenmaps.jpeg') }}" width="50" height="40"></a>
+            <a href="/home/" style="position: absolute; margin-top: 7px; padding-left: 0px;;">EigenMaps.AI</a>
+            
+            
+        
+            <div class="topnav-right">
+              <a href="/home/" style="margin-top: 7px;">Hello, XYZ</a>
+            </div>
+            
+          </div> -->
+
+
+          <nav class="navbar navbar-inverse navbar-fixed-top" style="margin-top: 1px;">
+            <div class="topnav">
+      
+              <!-- Centered link -->
+              <div class="topnav-centered">
+                <a href="/home/">EM Sandbox</a>
+              </div>
+              
+              <!-- Left-aligned links (default) -->
+              <a><img src="{{ url_for('static', path='eigenmaps.jpeg') }}" width="50" height="40"></a>
+              <a href="/home/" style="position: absolute; margin-top: 7px; padding-left: 0px;;">EigenMaps.AI</a>
+              
+              
+              <!-- Right-aligned links -->
+              <div class="topnav-right">
+                <a href="/home/" style="margin-top: 7px;">Hello, XYZ</a>
+              </div>
+              
+            </div>
+            </nav>
+      
+
+        
+<!--     
+
+          <div class="sidebar">
+            <a class="active" href="/home/">Home</a>
+            <a href="/idclassification/">ID-Classification</a>
+
+          </div>
+          
+          <div class="content" style="text-align: center;">
+            <h1>EigenMaps.AI</h1>
+            <hr width="50%">
+            <h3>Astra: No-Code Computer VisionX Platform</h3>
+            <h4>Autonomous platform for business managers</h4>
+            <h3></h3>
+          </div>
+ -->
+
+
+
+          <div class="container" style="margin-top: 70px;">
+
+            <div class="row">
+
+              <div class="col-sm-2">
+                <div class="sidebar">
+                    <a class="active" href="/home/">Home</a>
+                    <a href="/idclassification/">ID Classification</a>
+                    <a href="/namematch/">Name Match</a>
+                    <a href="/fullcard/">FullCard</a>
+                    <a href="/xerox/">Xerox Detection</a>
+                    <a href="/facematch/">Face Match</a>
+                    <a href="/solar/">Roof Top Detection</a>
+                    <a href="/spoof/">Spoof Detection</a>
+                  </div>
+              </div>
+
+              <div class="col-sm-10">
+                <div class="content" style="text-align: center;">
+                  <h1>EigenMaps.AI</h1>
+                  <hr width="50%">
+                  <h3>Astra: No-Code Computer VisionX Platform</h3>
+                  <h4>Autonomous platform for business managers</h4>
+                  <h3></h3>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+    </body>
+
+</html>
+
+
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+        <title>EM Sandbox</title>
+        <style>
+            body {
+              margin: 0;
+              font-family: "Lato", sans-serif;
+            }
+            
+            .sidebar {
+              margin: 0;
+              padding: 0;
+              width: 200px;
+              background-color: #f1f1f1;
+              position: fixed;
+              height: 100%;
+              overflow: auto;
+            }
+            
+            .sidebar a {
+              display: block;
+              color: black;
+              padding: 16px;
+              text-decoration: none;
+            }
+             
+            .sidebar a.active {
+              background-color: #04AA6D;
+              color: white;
+            }
+            
+            .sidebar a:hover:not(.active) {
+              background-color: #555;
+              color: white;
+            }
+            
+            div.content {
+              margin-left: 200px;
+              padding: 1px 16px;
+              height: 1000px;
+            }
+            
+            @media screen and (max-width: 700px) {
+              .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+              }
+              .sidebar a {float: left;}
+              div.content {margin-left: 0;}
+            }
+            
+            @media screen and (max-width: 400px) {
+              .sidebar a {
+                text-align: center;
+                float: none;
+              }
+            }
+
+            /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    
+    .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+.topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-centered a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.topnav-right {
+  float: right;
+}
+
+/* Responsive navigation menu (for mobile devices) */
+@media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+  
+  .topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+}
+
+div.content {
+  margin-left: 0px;
+  padding: 10px 16px;
+  height: 1000px;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 0px;
+  margin-left: 0px;
+  width: initial;
+}
+
+.col-sm-2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.col-sm-10 {
+    word-break: break-all;
+}
+
+input[type="file"] {
+  display: inline-flex;
+}
+
+            </style>
+        
+        <script type="text/javascript">
+          function submitForm() {
+              var formElement = document.getElementById('myForm');
+              var data = new FormData(formElement);
+          
+              fetch('/fullcard_data/', {
+                    method: 'POST',
+                    body: data,
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    document.getElementById("response_area").innerHTML = data;
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+          }
+          </script>
+
+
+<script>
+  function byId(e){return document.getElementById(e);}
+  
+  window.addEventListener('load', onDocLoaded, false);
+  
+  function onDocLoaded()
+  {
+      byId('mFileInput').addEventListener('change', onFileChosen, false);
+  }
+  
+  // fileVar is an object as returned by <input type='file'>
+  // imgElem is an <img> element - can be on/off screen (doesn't need to be added to the DOM)
+  function loadImgFromFile(fileVar, imgElem)
+  {
+      var fileReader = new FileReader();
+      fileReader.onload = onFileLoaded;
+      fileReader.readAsBinaryString(fileVar);
+      function onFileLoaded(fileLoadedEvent)
+      {
+          var result,data;
+          data = fileLoadedEvent.target.result;
+          result = "data:";
+          result += fileVar.type;
+          result += ";base64,";
+          result += btoa(data);
+          imgElem.src = result;
+          imgElem.origType = fileVar.type;    // unnecessary for loading the image, used by a current project.
+      }
+  }
+  
+  function onFileChosen(evt)
+  {
+      if (this.files.length != 0)
+      {
+          var tgtImg = byId('tgt');
+          var curFile = this.files[0];
+          loadImgFromFile(curFile, tgtImg);
+      }
+  }
+  
+  </script>
+
+<script type="text/javascript">
+
+  function loadVideo(self){
+
+         var fileName=self.files[0];
+
+         var srcSource=URL.createObjectURL(fileName);
+
+         targetVideo.src=srcSource;
+
+         targetVideo.load();
+
+  }
+
+  </script>
+
+
+    </head>
+
+    <body>
+<!-- 
+      <div class="topnav">
+        <a><img src="/home/aseem/Downloads/book-icon-sign-design-600w-553945819.webp"></a>
+        <a href="/home/">EM Sandbox</a>
+        <div class="topnav-right">
+          <a href="#login">Hello, XYZ</a>
+        </div>
+      </div> -->
+
+      <!-- Top navigation -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" style="margin-top: 1px;">
+      <div class="topnav">
+
+        <!-- Centered link -->
+        <div class="topnav-centered">
+          <a href="/home/">EM Sandbox</a>
+        </div>
+        
+        <!-- Left-aligned links (default) -->
+        <a><img src="{{ url_for('static', path='eigenmaps.jpeg') }}" width="50" height="40"></a>
+        <a href="/home/" style="position: absolute; margin-top: 7px; padding-left: 0px;;">EigenMaps.AI</a>
+        
+        
+        <!-- Right-aligned links -->
+        <div class="topnav-right">
+          <a href="/home/" style="margin-top: 7px;">Hello, XYZ</a>
+        </div>
+        
+      </div>
+      </nav>
+
+          
+
+
+          <div class="container" style="margin-top: 70px;">
+
+            <div class="row">
+
+              <div class="col-sm-2">
+                <div class="sidebar">
+                    <a class="active" href="/home/">Home</a>
+                    <a href="/idclassification/">ID Classification</a>
+                    <a href="/namematch/">Name Match</a>
+                    <a href="/fullcard/">FullCard</a>
+                    <a href="/xerox/">Xerox Detection</a>
+                    <a href="/facematch/">Face Match</a>
+                    <a href="/solar/">Roof Top Detection</a>
+                    <a href="/spoof/">Spoof Detection</a>
+                  </div>
+              </div>
+
+              <div class="col-sm-10">
+                <div class="content" style="text-align: center;">
+                    <h1 >Full Card</h1>
+                    <hr width="50%">
+                    <h4>Performing forgery detection operation on Aadhar cards and Pan cards.</h4>
+                    <!-- <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssssssssssssssssssswdefewfrsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssscvx</p> -->
+                    <hr>
+                    
+      
+                    <form method="post" id="myForm">
+      
+                      <label mt-3>Image (jpg/jpeg/png/pdf):</label><br>
+                      
+                      <input type="file" id='mFileInput' name="image_file"><br><br>
+
+                      <img id='tgt' style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"><br><br>
+
+                      <!-- <label mt-3>Video (mp4):</label><br>
+                      <input type="file" name="file" onchange="loadVideo(this);"/><br><br>
+
+                      <video autoplay id="targetVideo" controls style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"> </video>
+                      <br><br> -->
+
+
+
+      
+                      <input type="button" class="button" value="Predict" onclick="submitForm()">
+                    </form>
+                    
+                    <hr>
+                    <h3>Response</h3>
+                    <div id="response_area"></div>
+      
+      
+      
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+    </body>
+
+</html>
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+        <!-- <link rel="stylesheet" href="/css/style.css"> -->
+        <title>EM Sandbox</title>
+        <style>
+            body {
+              margin: 0;
+              font-family: "Lato", sans-serif;
+            }
+            
+            .sidebar {
+              margin: 0;
+              padding: 0;
+              width: 200px;
+              background-color: #f1f1f1;
+              position: fixed;
+              height: 100%;
+              overflow: auto;
+            }
+            
+            .sidebar a {
+              display: block;
+              color: black;
+              padding: 16px;
+              text-decoration: none;
+            }
+             
+            .sidebar a.active {
+              background-color: #04AA6D;
+              color: white;
+            }
+            
+            .sidebar a:hover:not(.active) {
+              background-color: #555;
+              color: white;
+            }
+            
+            div.content {
+              margin-left: 200px;
+              padding: 1px 16px;
+              height: 1000px;
+            }
+            
+            @media screen and (max-width: 700px) {
+              .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+              }
+              .sidebar a {float: left;}
+              div.content {margin-left: 0;}
+            }
+            
+            @media screen and (max-width: 400px) {
+              .sidebar a {
+                text-align: center;
+                float: none;
+              }
+            }
+
+            /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    
+    .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+.topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-centered a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.topnav-right {
+  float: right;
+}
+
+/* Responsive navigation menu (for mobile devices) */
+@media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+  
+  .topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+}
+
+div.content {
+  margin-left: 0px;
+  padding: 10px 16px;
+  height: 1000px;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 0px;
+  margin-left: 0px;
+  width: initial;
+}
+
+.col-sm-2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.col-sm-10 {
+    word-break: break-all;
+}
+
+input[type="file"] {
+  display: inline-flex;
+}
+
+.display-image{
+    width: 700px;
+    height: 425px;
+    border: 1px solid black;
+    background-position: center;
+    background-size: cover;
+    background-color: #04AA6D;
+  }
+
+            </style>
+        
+        <script type="text/javascript">
+          function submitForm() {
+              var formElement = document.getElementById('myForm');
+              var data = new FormData(formElement);
+          
+              fetch('/id_data/', {
+                    method: 'POST',
+                    body: data,
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    document.getElementById("response_area").innerHTML = data;
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+          }
+          </script>
+
+<script>
+  function byId(e){return document.getElementById(e);}
+  
+  window.addEventListener('load', onDocLoaded, false);
+  
+  function onDocLoaded()
+  {
+      byId('mFileInput').addEventListener('change', onFileChosen, false);
+  }
+  
+  // fileVar is an object as returned by <input type='file'>
+  // imgElem is an <img> element - can be on/off screen (doesn't need to be added to the DOM)
+  function loadImgFromFile(fileVar, imgElem)
+  {
+      var fileReader = new FileReader();
+      fileReader.onload = onFileLoaded;
+      fileReader.readAsBinaryString(fileVar);
+      function onFileLoaded(fileLoadedEvent)
+      {
+          var result,data;
+          data = fileLoadedEvent.target.result;
+          result = "data:";
+          result += fileVar.type;
+          result += ";base64,";
+          result += btoa(data);
+          imgElem.src = result;
+          imgElem.origType = fileVar.type;    // unnecessary for loading the image, used by a current project.
+      }
+  }
+  
+  function onFileChosen(evt)
+  {
+      if (this.files.length != 0)
+      {
+          var tgtImg = byId('tgt');
+          var curFile = this.files[0];
+          loadImgFromFile(curFile, tgtImg);
+      }
+  }
+  
+  </script>
+
+<script type="text/javascript">
+
+  function loadVideo(self){
+
+         var fileName=self.files[0];
+
+         var srcSource=URL.createObjectURL(fileName);
+
+         targetVideo.src=srcSource;
+
+         targetVideo.load();
+
+  }
+
+  </script>
+
+    </head>
+
+    <body>
+<!-- 
+      <div class="topnav">
+        <a><img src="/home/aseem/Downloads/book-icon-sign-design-600w-553945819.webp"></a>
+        <a href="/home/">EM Sandbox</a>
+        <div class="topnav-right">
+          <a href="#login">Hello, XYZ</a>
+        </div>
+      </div> -->
+
+      <!-- Top navigation -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" style="margin-top: 1px;">
+      <div class="topnav">
+
+        <!-- Centered link -->
+        <div class="topnav-centered">
+          <a href="/home/">EM Sandbox</a>
+        </div>
+        
+        <!-- Left-aligned links (default) -->
+        <a><img src="{{ url_for('static', path='eigenmaps.jpeg') }}" width="50" height="40"></a>
+        <a href="/home/" style="position: absolute; margin-top: 7px; padding-left: 0px;;">EigenMaps.AI</a>
+        
+        
+        <!-- Right-aligned links -->
+        <div class="topnav-right">
+          <a href="/home/" style="margin-top: 7px;">Hello, XYZ</a>
+        </div>
+        
+      </div>
+      </nav>
+
+          
+
+
+          <div class="container" style="margin-top: 70px;">
+
+            <div class="row">
+
+              <div class="col-sm-2">
+                <div class="sidebar">
+                    <a class="active" href="/home/">Home</a>
+                    <a href="/idclassification/">ID Classification</a>
+                    <a href="/namematch/">Name Match</a>
+                    <a href="/fullcard/">FullCard</a>
+                    <a href="/xerox/">Xerox Detection</a>
+                    <a href="/facematch/">Face Match</a>
+                    <a href="/solar/">Roof Top Detection</a>
+                    <a href="/spoof/">Spoof Detection</a>
+                  </div>
+              </div>
+
+              <div class="col-sm-10">
+                <div class="content" style="text-align: center;">
+                    <h1 >ID Classification</h1>
+                    <hr width="50%">
+                    <h4>Classification of different Indian identity cards like Aadhaar card, Pan card, Driving license, Voter ID, Passport and Cheque.</h4>
+                    <!-- <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssssssssssssssssssswdefewfrsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssscvx</p> -->
+                    <hr>
+                    
+      
+                    <form method="post" id="myForm">
+      
+                      <label mt-3>Image (jpg/jpeg/png/pdf):</label><br>
+                      
+                      <input type="file" id='mFileInput' name="image_file" required><br><br>
+
+                      <img id='tgt' style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"><br><br>
+
+                      <!-- <label mt-3>Video (mp4):</label><br>
+
+                      <input type="file" name="file" onchange="loadVideo(this);"/><br><br>
+
+                      <video autoplay id="targetVideo" controls style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"> </video><br><br> -->
+
+                      <input type="button" class="button" value="Predict" onclick="submitForm()">
+                    </form>
+
+    
+                    
+                    <hr>
+                    <h3>Response</h3>
+                    <div id="response_area"></div>
+      
+      
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+    </body>
+
+</html>
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+        <title>EM Sandbox</title>
+        <style>
+            body {
+              margin: 0;
+              font-family: "Lato", sans-serif;
+            }
+            
+            .sidebar {
+              margin: 0;
+              padding: 0;
+              width: 200px;
+              background-color: #f1f1f1;
+              position: fixed;
+              height: 100%;
+              overflow: auto;
+            }
+            
+            .sidebar a {
+              display: block;
+              color: black;
+              padding: 16px;
+              text-decoration: none;
+            }
+             
+            .sidebar a.active {
+              background-color: #04AA6D;
+              color: white;
+            }
+            
+            .sidebar a:hover:not(.active) {
+              background-color: #555;
+              color: white;
+            }
+            
+            div.content {
+              margin-left: 200px;
+              padding: 1px 16px;
+              height: 1000px;
+            }
+            
+            @media screen and (max-width: 700px) {
+              .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+              }
+              .sidebar a {float: left;}
+              div.content {margin-left: 0;}
+            }
+            
+            @media screen and (max-width: 400px) {
+              .sidebar a {
+                text-align: center;
+                float: none;
+              }
+            }
+
+            /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    
+    .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+.topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-centered a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.topnav-right {
+  float: right;
+}
+
+/* Responsive navigation menu (for mobile devices) */
+@media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+  
+  .topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+}
+
+div.content {
+  margin-left: 0px;
+  padding: 10px 16px;
+  height: 1000px;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 0px;
+  margin-left: 0px;
+  width: initial;
+}
+
+.col-sm-2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.col-sm-10 {
+    word-break: break-all;
+}
+
+input[type="file"] {
+  display: inline-flex;
+}
+
+            </style>
+        
+        <script type="text/javascript">
+          function submitForm() {
+              var formElement = document.getElementById('myForm');
+              var data = new FormData(formElement);
+          
+              fetch('/namematch_data/', {
+                    method: 'POST',
+                    body: data,
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    document.getElementById("response_area").innerHTML = data;
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+          }
+          </script>
+
+
+<script>
+  function byId(e){return document.getElementById(e);}
+  
+  window.addEventListener('load', onDocLoaded, false);
+  
+  function onDocLoaded()
+  {
+      byId('mFileInput').addEventListener('change', onFileChosen, false);
+  }
+  
+  // fileVar is an object as returned by <input type='file'>
+  // imgElem is an <img> element - can be on/off screen (doesn't need to be added to the DOM)
+  function loadImgFromFile(fileVar, imgElem)
+  {
+      var fileReader = new FileReader();
+      fileReader.onload = onFileLoaded;
+      fileReader.readAsBinaryString(fileVar);
+      function onFileLoaded(fileLoadedEvent)
+      {
+          var result,data;
+          data = fileLoadedEvent.target.result;
+          result = "data:";
+          result += fileVar.type;
+          result += ";base64,";
+          result += btoa(data);
+          imgElem.src = result;
+          imgElem.origType = fileVar.type;    // unnecessary for loading the image, used by a current project.
+      }
+  }
+  
+  function onFileChosen(evt)
+  {
+      if (this.files.length != 0)
+      {
+          var tgtImg = byId('tgt');
+          var curFile = this.files[0];
+          loadImgFromFile(curFile, tgtImg);
+      }
+  }
+  
+  </script>
+
+<script type="text/javascript">
+
+  function loadVideo(self){
+
+         var fileName=self.files[0];
+
+         var srcSource=URL.createObjectURL(fileName);
+
+         targetVideo.src=srcSource;
+
+         targetVideo.load();
+
+  }
+
+  </script>
+
+
+    </head>
+
+    <body>
+<!-- 
+      <div class="topnav">
+        <a><img src="/home/aseem/Downloads/book-icon-sign-design-600w-553945819.webp"></a>
+        <a href="/home/">EM Sandbox</a>
+        <div class="topnav-right">
+          <a href="#login">Hello, XYZ</a>
+        </div>
+      </div> -->
+
+      <!-- Top navigation -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" style="margin-top: 1px;">
+      <div class="topnav">
+
+        <!-- Centered link -->
+        <div class="topnav-centered">
+          <a href="/home/">EM Sandbox</a>
+        </div>
+        
+        <!-- Left-aligned links (default) -->
+        <a><img src="{{ url_for('static', path='eigenmaps.jpeg') }}" width="50" height="40"></a>
+        <a href="/home/" style="position: absolute; margin-top: 7px; padding-left: 0px;;">EigenMaps.AI</a>
+        
+        
+        <!-- Right-aligned links -->
+        <div class="topnav-right">
+          <a href="/home/" style="margin-top: 7px;">Hello, XYZ</a>
+        </div>
+        
+      </div>
+      </nav>
+
+          
+
+
+          <div class="container" style="margin-top: 70px;">
+
+            <div class="row">
+
+              <div class="col-sm-2">
+                <div class="sidebar">
+                    <a class="active" href="/home/">Home</a>
+                    <a href="/idclassification/">ID Classification</a>
+                    <a href="/namematch/">Name Match</a>
+                    <a href="/fullcard/">FullCard</a>
+                    <a href="/xerox/">Xerox Detection</a>
+                    <a href="/facematch/">Face Match</a>
+                    <a href="/solar/">Roof Top Detection</a>
+                    <a href="/spoof/">Spoof Detection</a>
+                  </div>
+              </div>
+
+              <div class="col-sm-10">
+                <div class="content" style="text-align: center;">
+                    <h1 >Name Match</h1>
+                    <hr width="50%">
+                    <h4>Identifying whether the given two names are same or not.</h4>
+                    <!-- <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssssssssssssssssssswdefewfrsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssscvx</p> -->
+                    <hr>
+                    
+      
+                    <form method="post" id="myForm">
+      
+                      <label mt-3>First Name:</label><br>
+                      <input type="text" name="first"><br><br>
+
+                      <label mt-3>Second Name:</label><br>
+                      <input type="text" name="second"><br><br>
+      
+                      <!-- <input type="file" id='mFileInput' name="image_file"><br><br>
+
+                      <img id='tgt' style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"><br><br>
+
+
+                      <label mt-3>Video (mp4):</label><br>
+                      <input type="file" name="file" onchange="loadVideo(this);"/><br><br>
+
+                      <video autoplay id="targetVideo" controls style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"> </video><br><br> -->
+      
+                      <input type="button" class="button" value="Predict" onclick="submitForm()">
+                    </form>
+                    
+                    <hr>
+                    <h3>Response</h3>
+                    <div id="response_area"></div>
+      
+      
+      
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+    </body>
+
+</html>
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+        <title>EM Sandbox</title>
+        <style>
+            body {
+              margin: 0;
+              font-family: "Lato", sans-serif;
+            }
+            
+            .sidebar {
+              margin: 0;
+              padding: 0;
+              width: 200px;
+              background-color: #f1f1f1;
+              position: fixed;
+              height: 100%;
+              overflow: auto;
+            }
+            
+            .sidebar a {
+              display: block;
+              color: black;
+              padding: 16px;
+              text-decoration: none;
+            }
+             
+            .sidebar a.active {
+              background-color: #04AA6D;
+              color: white;
+            }
+            
+            .sidebar a:hover:not(.active) {
+              background-color: #555;
+              color: white;
+            }
+            
+            div.content {
+              margin-left: 200px;
+              padding: 1px 16px;
+              height: 1000px;
+            }
+            
+            @media screen and (max-width: 700px) {
+              .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+              }
+              .sidebar a {float: left;}
+              div.content {margin-left: 0;}
+            }
+            
+            @media screen and (max-width: 400px) {
+              .sidebar a {
+                text-align: center;
+                float: none;
+              }
+            }
+
+            /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    
+    .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+.topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-centered a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.topnav-right {
+  float: right;
+}
+
+/* Responsive navigation menu (for mobile devices) */
+@media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+  
+  .topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+}
+
+div.content {
+  margin-left: 0px;
+  padding: 10px 16px;
+  height: 1000px;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 0px;
+  margin-left: 0px;
+  width: initial;
+}
+
+.col-sm-2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.col-sm-10 {
+    word-break: break-all;
+}
+
+input[type="file"] {
+  display: inline-flex;
+}
+
+            </style>
+        
+        <script type="text/javascript">
+          function submitForm() {
+              var formElement = document.getElementById('myForm');
+              var data = new FormData(formElement);
+          
+              fetch('/xerox_data/', {
+                    method: 'POST',
+                    body: data,
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    document.getElementById("response_area").innerHTML = data;
+                    // document.write(data);
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+          }
+          </script>
+
+
+<script>
+  function byId(e){return document.getElementById(e);}
+  
+  window.addEventListener('load', onDocLoaded, false);
+  
+  function onDocLoaded()
+  {
+      byId('mFileInput').addEventListener('change', onFileChosen, false);
+  }
+  
+  // fileVar is an object as returned by <input type='file'>
+  // imgElem is an <img> element - can be on/off screen (doesn't need to be added to the DOM)
+  function loadImgFromFile(fileVar, imgElem)
+  {
+      var fileReader = new FileReader();
+      fileReader.onload = onFileLoaded;
+      fileReader.readAsBinaryString(fileVar);
+      function onFileLoaded(fileLoadedEvent)
+      {
+          var result,data;
+          data = fileLoadedEvent.target.result;
+          result = "data:";
+          result += fileVar.type;
+          result += ";base64,";
+          result += btoa(data);
+          imgElem.src = result;
+          imgElem.origType = fileVar.type;    // unnecessary for loading the image, used by a current project.
+      }
+  }
+  
+  function onFileChosen(evt)
+  {
+      if (this.files.length != 0)
+      {
+          var tgtImg = byId('tgt');
+          var curFile = this.files[0];
+          loadImgFromFile(curFile, tgtImg);
+      }
+  }
+  
+  </script>
+
+<script type="text/javascript">
+
+  function loadVideo(self){
+
+         var fileName=self.files[0];
+
+         var srcSource=URL.createObjectURL(fileName);
+
+         targetVideo.src=srcSource;
+
+         targetVideo.load();
+
+  }
+
+  </script>
+
+
+    </head>
+
+    <body>
+<!-- 
+      <div class="topnav">
+        <a><img src="/home/aseem/Downloads/book-icon-sign-design-600w-553945819.webp"></a>
+        <a href="/home/">EM Sandbox</a>
+        <div class="topnav-right">
+          <a href="#login">Hello, XYZ</a>
+        </div>
+      </div> -->
+
+      <!-- Top navigation -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" style="margin-top: 1px;">
+      <div class="topnav">
+
+        <!-- Centered link -->
+        <div class="topnav-centered">
+          <a href="/home/">EM Sandbox</a>
+        </div>
+        
+        <!-- Left-aligned links (default) -->
+        <a><img src="{{ url_for('static', path='eigenmaps.jpeg') }}" width="50" height="40"></a>
+        <a href="/home/" style="position: absolute; margin-top: 7px; padding-left: 0px;;">EigenMaps.AI</a>
+        
+        
+        <!-- Right-aligned links -->
+        <div class="topnav-right">
+          <a href="/home/" style="margin-top: 7px;">Hello, XYZ</a>
+        </div>
+        
+      </div>
+      </nav>
+
+          
+
+
+          <div class="container" style="margin-top: 70px;">
+
+            <div class="row">
+
+              <div class="col-sm-2">
+                <div class="sidebar">
+                    <a class="active" href="/home/">Home</a>
+                    <a href="/idclassification/">ID Classification</a>
+                    <a href="/namematch/">Name Match</a>
+                    <a href="/fullcard/">FullCard</a>
+                    <a href="/xerox/">Xerox Detection</a>
+                    <a href="/facematch/">Face Match</a>
+                    <a href="/solar/">Roof Top Detection</a>
+                    <a href="/spoof/">Spoof Detection</a>
+                  </div>
+              </div>
+
+              <div class="col-sm-10">
+                <div class="content" style="text-align: center;">
+                    <h1 >Xerox Detection</h1>
+                    <hr width="50%">
+                    <h4>Detecting  whether the different Indian identity cards like Aadhaar card, Pan card, Driving license, Voter ID and Passport are photocopy of it's original card or not.</h4>
+                    <!-- <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssssssssssssssssssswdefewfrsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssscvx</p> -->
+                    <hr>
+                    
+      
+                    <form method="post" id="myForm">
+      
+                      <label mt-3>Image (jpg/jpeg/png/pdf):</label><br>
+                      
+                      <input type="file" id='mFileInput' name="image_file"><br><br>
+
+                      <img id='tgt' style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"><br><br>
+
+                      <!-- <label mt-3>Video (mp4):</label><br>
+                      <input type="file" name="file" onchange="loadVideo(this);"/><br><br>
+
+                      <video autoplay id="targetVideo" controls style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"> </video>
+                      <br><br> -->
+      
+                      <input type="button" class="button" value="Predict" onclick="submitForm()">
+                    </form>
+                    
+                    <hr>
+                    <h3>Response</h3>
+                    <div id="response_area"></div>
+      
+      
+      
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+    </body>
+
+</html>
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+        <title>EM Sandbox</title>
+        <style>
+            body {
+              margin: 0;
+              font-family: "Lato", sans-serif;
+            }
+            
+            .sidebar {
+              margin: 0;
+              padding: 0;
+              width: 200px;
+              background-color: #f1f1f1;
+              position: fixed;
+              height: 100%;
+              overflow: auto;
+            }
+            
+            .sidebar a {
+              display: block;
+              color: black;
+              padding: 16px;
+              text-decoration: none;
+            }
+             
+            .sidebar a.active {
+              background-color: #04AA6D;
+              color: white;
+            }
+            
+            .sidebar a:hover:not(.active) {
+              background-color: #555;
+              color: white;
+            }
+            
+            div.content {
+              margin-left: 200px;
+              padding: 1px 16px;
+              height: 1000px;
+            }
+            
+            @media screen and (max-width: 700px) {
+              .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+              }
+              .sidebar a {float: left;}
+              div.content {margin-left: 0;}
+            }
+            
+            @media screen and (max-width: 400px) {
+              .sidebar a {
+                text-align: center;
+                float: none;
+              }
+            }
+
+            /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    
+    .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+.topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-centered a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.topnav-right {
+  float: right;
+}
+
+/* Responsive navigation menu (for mobile devices) */
+@media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+  
+  .topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+}
+
+div.content {
+  margin-left: 0px;
+  padding: 10px 16px;
+  height: 1000px;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 0px;
+  margin-left: 0px;
+  width: initial;
+}
+
+.col-sm-2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.col-sm-10 {
+    word-break: break-all;
+}
+
+input[type="file"] {
+  display: inline-flex;
+}
+
+            </style>
+        
+        <script type="text/javascript">
+          function submitForm() {
+              var formElement = document.getElementById('myForm');
+              var data = new FormData(formElement);
+          
+              fetch('/solar_data/', {
+                    method: 'POST',
+                    body: data,
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    document.getElementById("response_area").innerHTML = data;
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+          }
+          </script>
+
+
+
+<script>
+  function byId(e){return document.getElementById(e);}
+  
+  window.addEventListener('load', onDocLoaded, false);
+  
+  function onDocLoaded()
+  {
+      byId('mFileInput').addEventListener('change', onFileChosen, false);
+  }
+  
+  // fileVar is an object as returned by <input type='file'>
+  // imgElem is an <img> element - can be on/off screen (doesn't need to be added to the DOM)
+  function loadImgFromFile(fileVar, imgElem)
+  {
+      var fileReader = new FileReader();
+      fileReader.onload = onFileLoaded;
+      fileReader.readAsBinaryString(fileVar);
+      function onFileLoaded(fileLoadedEvent)
+      {
+          var result,data;
+          data = fileLoadedEvent.target.result;
+          result = "data:";
+          result += fileVar.type;
+          result += ";base64,";
+          result += btoa(data);
+          imgElem.src = result;
+          imgElem.origType = fileVar.type;    // unnecessary for loading the image, used by a current project.
+      }
+  }
+  
+  function onFileChosen(evt)
+  {
+      if (this.files.length != 0)
+      {
+          var tgtImg = byId('tgt');
+          var curFile = this.files[0];
+          loadImgFromFile(curFile, tgtImg);
+      }
+  }
+  
+  </script>
+
+<script type="text/javascript">
+
+  function loadVideo(self){
+
+         var fileName=self.files[0];
+
+         var srcSource=URL.createObjectURL(fileName);
+
+         targetVideo.src=srcSource;
+
+         targetVideo.load();
+
+  }
+
+  </script>
+
+
+    </head>
+
+    <body>
+<!-- 
+      <div class="topnav">
+        <a><img src="/home/aseem/Downloads/book-icon-sign-design-600w-553945819.webp"></a>
+        <a href="/home/">EM Sandbox</a>
+        <div class="topnav-right">
+          <a href="#login">Hello, XYZ</a>
+        </div>
+      </div> -->
+
+      <!-- Top navigation -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" style="margin-top: 1px;">
+      <div class="topnav">
+
+        <!-- Centered link -->
+        <div class="topnav-centered">
+          <a href="/home/">EM Sandbox</a>
+        </div>
+        
+        <!-- Left-aligned links (default) -->
+        <a><img src="{{ url_for('static', path='eigenmaps.jpeg') }}" width="50" height="40"></a>
+        <a href="/home/" style="position: absolute; margin-top: 7px; padding-left: 0px;;">EigenMaps.AI</a>
+        
+        
+        <!-- Right-aligned links -->
+        <div class="topnav-right">
+          <a href="/home/" style="margin-top: 7px;">Hello, XYZ</a>
+        </div>
+        
+      </div>
+      </nav>
+
+          
+
+
+          <div class="container" style="margin-top: 70px;">
+
+            <div class="row">
+
+              <div class="col-sm-2">
+                <div class="sidebar">
+                    <a class="active" href="/home/">Home</a>
+                    <a href="/idclassification/">ID Classification</a>
+                    <a href="/namematch/">Name Match</a>
+                    <a href="/fullcard/">FullCard</a>
+                    <a href="/xerox/">Xerox Detection</a>
+                    <a href="/facematch/">Face Match</a>
+                    <a href="/solar/">Roof Top Detection</a>
+                    <a href="/spoof/">Spoof Detection</a>
+                  </div>
+              </div>
+
+              <div class="col-sm-10">
+                <div class="content" style="text-align: center;">
+                    <h1 >Roof Top Detection</h1>
+                    <hr width="50%">
+                    <h4>Identifying the edges of the given Roof top images.</h4>
+                    <!-- <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssssssssssssssssssswdefewfrsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssscvx</p> -->
+                    <hr>
+                    
+      
+                    <form method="post" id="myForm">
+      
+                      <label mt-3>Image (jpg/jpeg/png/pdf):</label><br>
+                      
+                      <input type="file" id='mFileInput' name="image_file"><br><br>
+
+                      <img id='tgt' style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"><br><br>
+
+
+                      <!-- <label mt-3>Video (mp4):</label><br>
+                      <input type="file" name="file" onchange="loadVideo(this);"/><br><br>
+
+                      <video autoplay id="targetVideo" controls style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"> </video><br><br> -->
+      
+                      <input type="button" class="button" value="Predict" onclick="submitForm()">
+                    </form>
+                    
+                    <hr>
+                    <h3>Response</h3>
+                    <div id="response_area"></div>
+      
+      
+      
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+    </body>
+
+</html>
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+        <title>EM Sandbox</title>
+        <style>
+            body {
+              margin: 0;
+              font-family: "Lato", sans-serif;
+            }
+            
+            .sidebar {
+              margin: 0;
+              padding: 0;
+              width: 200px;
+              background-color: #f1f1f1;
+              position: fixed;
+              height: 100%;
+              overflow: auto;
+            }
+            
+            .sidebar a {
+              display: block;
+              color: black;
+              padding: 16px;
+              text-decoration: none;
+            }
+             
+            .sidebar a.active {
+              background-color: #04AA6D;
+              color: white;
+            }
+            
+            .sidebar a:hover:not(.active) {
+              background-color: #555;
+              color: white;
+            }
+            
+            div.content {
+              margin-left: 200px;
+              padding: 1px 16px;
+              height: 1000px;
+            }
+            
+            @media screen and (max-width: 700px) {
+              .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+              }
+              .sidebar a {float: left;}
+              div.content {margin-left: 0;}
+            }
+            
+            @media screen and (max-width: 400px) {
+              .sidebar a {
+                text-align: center;
+                float: none;
+              }
+            }
+
+            /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    
+    .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+.topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-centered a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.topnav-right {
+  float: right;
+}
+
+/* Responsive navigation menu (for mobile devices) */
+@media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+  
+  .topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+}
+
+div.content {
+  margin-left: 0px;
+  padding: 10px 16px;
+  height: 1000px;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 0px;
+  margin-left: 0px;
+  width: initial;
+}
+
+.col-sm-2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.col-sm-10 {
+    word-break: break-all;
+}
+
+input[type="file"] {
+  display: inline-flex;
+}
+
+            </style>
+        
+        <script type="text/javascript">
+          function submitForm() {
+              var formElement = document.getElementById('myForm');
+              var data = new FormData(formElement);
+          
+              fetch('/facematch_data/', {
+                    method: 'POST',
+                    body: data,
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    document.getElementById("response_area").innerHTML = data;
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+          }
+          </script>
+
+
+<script>
+  function byId(e){return document.getElementById(e);}
+  
+  window.addEventListener('load', onDocLoaded, false);
+  
+  function onDocLoaded()
+  {
+      byId('mFileInput').addEventListener('change', onFileChosen, false);
+  }
+  
+  // fileVar is an object as returned by <input type='file'>
+  // imgElem is an <img> element - can be on/off screen (doesn't need to be added to the DOM)
+  function loadImgFromFile(fileVar, imgElem)
+  {
+      var fileReader = new FileReader();
+      fileReader.onload = onFileLoaded;
+      fileReader.readAsBinaryString(fileVar);
+      function onFileLoaded(fileLoadedEvent)
+      {
+          var result,data;
+          data = fileLoadedEvent.target.result;
+          result = "data:";
+          result += fileVar.type;
+          result += ";base64,";
+          result += btoa(data);
+          imgElem.src = result;
+          imgElem.origType = fileVar.type;    // unnecessary for loading the image, used by a current project.
+      }
+  }
+  
+  function onFileChosen(evt)
+  {
+      if (this.files.length != 0)
+      {
+          var tgtImg = byId('tgt');
+          var curFile = this.files[0];
+          loadImgFromFile(curFile, tgtImg);
+      }
+  }
+  
+  </script>
+
+<script type="text/javascript">
+
+  function loadVideo(self){
+
+         var fileName=self.files[0];
+
+         var srcSource=URL.createObjectURL(fileName);
+
+         targetVideo.src=srcSource;
+
+         targetVideo.load();
+
+  }
+
+  </script>
+
+
+    </head>
+
+    <body>
+<!-- 
+      <div class="topnav">
+        <a><img src="/home/aseem/Downloads/book-icon-sign-design-600w-553945819.webp"></a>
+        <a href="/home/">EM Sandbox</a>
+        <div class="topnav-right">
+          <a href="#login">Hello, XYZ</a>
+        </div>
+      </div> -->
+
+      <!-- Top navigation -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" style="margin-top: 1px;">
+      <div class="topnav">
+
+        <!-- Centered link -->
+        <div class="topnav-centered">
+          <a href="/home/">EM Sandbox</a>
+        </div>
+        
+        <!-- Left-aligned links (default) -->
+        <a><img src="{{ url_for('static', path='eigenmaps.jpeg') }}" width="50" height="40"></a>
+        <a href="/home/" style="position: absolute; margin-top: 7px; padding-left: 0px;;">EigenMaps.AI</a>
+        
+        
+        <!-- Right-aligned links -->
+        <div class="topnav-right">
+          <a href="/home/" style="margin-top: 7px;">Hello, XYZ</a>
+        </div>
+        
+      </div>
+      </nav>
+
+          
+
+
+          <div class="container" style="margin-top: 70px;">
+
+            <div class="row">
+
+              <div class="col-sm-2">
+                <div class="sidebar">
+                    <a class="active" href="/home/">Home</a>
+                    <a href="/idclassification/">ID Classification</a>
+                    <a href="/namematch/">Name Match</a>
+                    <a href="/fullcard/">FullCard</a>
+                    <a href="/xerox/">Xerox Detection</a>
+                    <a href="/facematch/">Face Match</a>
+                    <a href="/solar/">Roof Top Detection</a>
+                    <a href="/spoof/">Spoof Detection</a>
+                  </div>
+              </div>
+
+              <div class="col-sm-10">
+                <div class="content" style="text-align: center;">
+                    <h1 >Face Match</h1>
+                    <hr width="50%">
+                    <h4>Identifying whether the given user image with card number will be matched with our database image or not.</h4>
+                    <!-- <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssssssssssssssssssswdefewfrsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssscvx</p> -->
+                    <hr>
+                    
+      
+                    <form method="post" id="myForm">
+      
+                      <label mt-3>Image (jpg/jpeg/png/pdf):</label><br>
+                      
+                      <input type="file" id='mFileInput' name="image_file"><br><br>
+
+
+
+                      <img id='tgt' style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"><br><br>
+
+                      <label mt-3>Card Number:</label><br>
+                      <input type="text" name="card"><br><br>
+
+                      <label mt-3>ATM ID:</label><br>
+                      <input type="text" name="atm"><br><br>
+
+                      <!-- <label mt-3>Video (mp4):</label><br>
+
+                      <input type="file" name="file" onchange="loadVideo(this);"/><br><br>
+
+                      <video autoplay id="targetVideo" controls style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"> </video>
+                      <br><br> -->
+
+
+      
+                      <input type="button" class="button" value="Predict" onclick="submitForm()">
+                    </form>
+                    
+                    <hr>
+                    <h3>Response</h3>
+                    <div id="response_area"></div>
+      
+      
+      
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+    </body>
+
+</html>
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+        <title>EM Sandbox</title>
+        <style>
+            body {
+              margin: 0;
+              font-family: "Lato", sans-serif;
+            }
+            
+            .sidebar {
+              margin: 0;
+              padding: 0;
+              width: 200px;
+              background-color: #f1f1f1;
+              position: fixed;
+              height: 100%;
+              overflow: auto;
+            }
+            
+            .sidebar a {
+              display: block;
+              color: black;
+              padding: 16px;
+              text-decoration: none;
+            }
+             
+            .sidebar a.active {
+              background-color: #04AA6D;
+              color: white;
+            }
+            
+            .sidebar a:hover:not(.active) {
+              background-color: #555;
+              color: white;
+            }
+            
+            div.content {
+              margin-left: 200px;
+              padding: 1px 16px;
+              height: 1000px;
+            }
+            
+            @media screen and (max-width: 700px) {
+              .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+              }
+              .sidebar a {float: left;}
+              div.content {margin-left: 0;}
+            }
+            
+            @media screen and (max-width: 400px) {
+              .sidebar a {
+                text-align: center;
+                float: none;
+              }
+            }
+
+            /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    
+    .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+.topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-centered a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.topnav-right {
+  float: right;
+}
+
+/* Responsive navigation menu (for mobile devices) */
+@media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+  
+  .topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+}
+
+div.content {
+  margin-left: 0px;
+  padding: 10px 16px;
+  height: 1000px;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 0px;
+  margin-left: 0px;
+  width: initial;
+}
+
+.col-sm-2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.col-sm-10 {
+    word-break: break-all;
+}
+
+input[type="file"] {
+  display: inline-flex;
+}
+
+            </style>
+        
+        <script type="text/javascript">
+          function submitForm() {
+              var formElement = document.getElementById('myForm');
+              var data = new FormData(formElement);
+          
+              fetch('/spoof_data/', {
+                    method: 'POST',
+                    body: data,
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    document.getElementById("response_area").innerHTML = data;
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+          }
+          </script>
+
+
+
+<script>
+  function byId(e){return document.getElementById(e);}
+  
+  window.addEventListener('load', onDocLoaded, false);
+  
+  function onDocLoaded()
+  {
+      byId('mFileInput').addEventListener('change', onFileChosen, false);
+  }
+  
+  // fileVar is an object as returned by <input type='file'>
+  // imgElem is an <img> element - can be on/off screen (doesn't need to be added to the DOM)
+  function loadImgFromFile(fileVar, imgElem)
+  {
+      var fileReader = new FileReader();
+      fileReader.onload = onFileLoaded;
+      fileReader.readAsBinaryString(fileVar);
+      function onFileLoaded(fileLoadedEvent)
+      {
+          var result,data;
+          data = fileLoadedEvent.target.result;
+          result = "data:";
+          result += fileVar.type;
+          result += ";base64,";
+          result += btoa(data);
+          imgElem.src = result;
+          imgElem.origType = fileVar.type;    // unnecessary for loading the image, used by a current project.
+      }
+  }
+  
+  function onFileChosen(evt)
+  {
+      if (this.files.length != 0)
+      {
+          var tgtImg = byId('tgt');
+          var curFile = this.files[0];
+          loadImgFromFile(curFile, tgtImg);
+      }
+  }
+  
+  </script>
+
+<script type="text/javascript">
+
+  function loadVideo(self){
+
+         var fileName=self.files[0];
+
+         var srcSource=URL.createObjectURL(fileName);
+
+         targetVideo.src=srcSource;
+
+         targetVideo.load();
+
+  }
+
+  </script>
+
+
+    </head>
+
+    <body>
+<!-- 
+      <div class="topnav">
+        <a><img src="/home/aseem/Downloads/book-icon-sign-design-600w-553945819.webp"></a>
+        <a href="/home/">EM Sandbox</a>
+        <div class="topnav-right">
+          <a href="#login">Hello, XYZ</a>
+        </div>
+      </div> -->
+
+      <!-- Top navigation -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" style="margin-top: 1px;">
+      <div class="topnav">
+
+        <!-- Centered link -->
+        <div class="topnav-centered">
+          <a href="/home/">EM Sandbox</a>
+        </div>
+        
+        <!-- Left-aligned links (default) -->
+        <a><img src="{{ url_for('static', path='eigenmaps.jpeg') }}" width="50" height="40"></a>
+        <a href="/home/" style="position: absolute; margin-top: 7px; padding-left: 0px;;">EigenMaps.AI</a>
+        
+        
+        <!-- Right-aligned links -->
+        <div class="topnav-right">
+          <a href="/home/" style="margin-top: 7px;">Hello, XYZ</a>
+        </div>
+        
+      </div>
+      </nav>
+
+          
+
+
+          <div class="container" style="margin-top: 70px;">
+
+            <div class="row">
+
+              <div class="col-sm-2">
+                <div class="sidebar">
+                    <a class="active" href="/home/">Home</a>
+                    <a href="/idclassification/">ID Classification</a>
+                    <a href="/namematch/">Name Match</a>
+                    <a href="/fullcard/">FullCard</a>
+                    <a href="/xerox/">Xerox Detection</a>
+                    <a href="/facematch/">Face Match</a>
+                    <a href="/solar/">Roof Top Detection</a>
+                    <a href="/spoof/">Spoof Detection</a>
+                  </div>
+              </div>
+
+              <div class="col-sm-10">
+                <div class="content" style="text-align: center;">
+                    <h1 >Spoof Detection</h1>
+                    <hr width="50%">
+                    <h4>Identifying whether the person is spoofed or not.</h4>
+                    <!-- <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssssssssssssssssssswdefewfrsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssscvx</p> -->
+                    <hr>
+                    
+      
+                    <form method="post" id="myForm">
+      
+                      <label mt-3>Image (jpg/jpeg/png/pdf):</label><br>
+                      
+                      <input type="file" id='mFileInput' name="image_file"><br><br>
+
+                      <img id='tgt' style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"><br><br>
+
+
+                      <!-- <label mt-3>Video (mp4):</label><br>
+                      <input type="file" name="file" onchange="loadVideo(this);"/><br><br>
+
+                      <video autoplay id="targetVideo" controls style="width: 400px;
+                      height: 225px;
+                      border: 1px solid black;
+                      background-position: center;
+                      background-size: cover;
+                      text-align: center;"> </video><br><br> -->
+
+      
+                      <input type="button" class="button" value="Predict" onclick="submitForm()">
+                    </form>
+                    
+                    <hr>
+                    <h3>Response</h3>
+                    <div id="response_area"></div>
+      
+      
+      
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+    </body>
+
+</html>
+

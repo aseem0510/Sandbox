@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EM Sandbox Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand logo nav-item" href="/home/">
+            <img src="{{ url_for('static', path='logo1Sandbox.svg') }}" alt="logo">
+        </a>          
+            <a href="/login/"><button type="submit" class="btn btn-outline-primary nav-item" >Sign-in</button></a>
+      </div>
+    </nav>
+
+    <section id="hero">
+      <div class="hero">
+         <div class="row">
+            <div class="col-lg-6 content">
+               <h1>SandBox:</h1>
+               <h4 style="margin-top: 10px;">An Open-source tool for ML models</h4>
+               <a href="/register/"><button class="btn btn-primary btn-lg" style="margin-top: 30px;">Register Now</button></a>
+            </div>
+            <div class="col-lg-6">
+               <img src="{{ url_for('static', path='hero.png') }}" class="man" alt="man">
+            </div>
+         </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+         <div class="row">
+            <h2 style="margin-bottom: 30px;">Explore our ML Models</h2>
+            <br>
+         </div>
+         
+         <div class="block">
+            <div class="row">
+              <div class="span4">
+                  <img class="img-left" src="{{ url_for('static', path='id-image.svg') }}"/>
+                <div class="content-heading"><h4>ID Classification </h4>
+                  <p>Classification of different Indian identity cards like Aadhaar card, Pan card, Driving license, Voter ID, Passport and Cheque.</p>
+               </div>
+                
+              </div>
+           </div>
+           <br/>
+            <div class="row">
+              <div class="span4">
+                <img class="img-left" src="{{ url_for('static', path='namematch-image.svg') }}"/>
+                <div class="content-heading"><h4>Name Match </h4></div>
+                <p>Identifying whether the given two names are same or not.</p>
+              </div>
+           </div>
+           <br>
+           <div class="row">
+            <div class="span4">
+              <img class="img-left" src="{{ url_for('static', path='fullcard-image.svg') }}"/>
+              <div class="content-heading"><h4>Full card</h4></div>
+              <p>Performing forgery detection operation on Aadhar cards and Pan cards.</p>
+            </div>
+         </div>
+         <br>
+           <div class="row">
+            <div class="span4">
+              <img class="img-left" src="{{ url_for('static', path='xerox-image.svg') }}"/>
+              <div class="content-heading"><h4>Xerox Detection</h4></div>
+              <p>Detecting whether the different Indian identity cards like Aadhaar card, Pan card, Driving license, Voter ID and Passport are photocopy of it's original card or not.</p>
+            </div>
+         </div>
+         <br>
+           <div class="row">
+            <div class="span4">
+              <img class="img-left" src="{{ url_for('static', path='facematch-image.svg') }}"/>
+              <div class="content-heading"><h4>Face Match</h4></div>
+              <p>Identifying whether the given user image with card number will be matched with our database image or not.</p>
+            </div>
+         </div>
+         <br>
+           <div class="row">
+            <div class="span4">
+              <img class="img-left" src="{{ url_for('static', path='rooftop-image.svg') }}"/>
+              <div class="content-heading"><h4>Roof Top Detection</h4></div>
+              <p>Identifying the edges of the given Roof top images.</p>
+            </div>
+         </div>
+         <br>
+           <div class="row">
+            <div class="span4">
+              <img class="img-left" src="{{ url_for('static', path='spoof-image.svg') }}"/>
+              <div class="content-heading"><h4>Spoof Detection</h4></div>
+              <p>Identifying whether the person is spoofed or not.</p>
+            </div>
+         </div>
+          </div>
+          
+      </div>
+    </section>
+
+    
+
+    <footer class="text-center text-white" style="background-color: #5800FF;">
+      <!-- Grid container -->
+      <div class="container p-4"></div>
+      <!-- Grid container -->
+    
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: #5800FF;">
+        © 2020 Copyright:
+        <a class="text-white" href="https://eigenmaps.ai/">EigenMaps.ai</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </body>
+</html>
