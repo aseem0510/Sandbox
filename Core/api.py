@@ -166,8 +166,8 @@ async def login(request: Request, msg: str = None):
 async def login_data(request: Request, username: str = Form(...), access_key: str = Form(...)):
 
     username = username    
-    # api_key = access_key
-    api_key = "6319b9d2b1c9e6efc7dff11f"
+    api_key = access_key
+    # api_key = "6319b9d2b1c9e6efc7dff11f"
     # api_key = "22222222222222"
 
     key_ids = db_util.get_keys()
@@ -179,18 +179,22 @@ async def login_data(request: Request, username: str = Form(...), access_key: st
 
     else:
 
-        flag = validation(api_key)
+        # flag = validation(api_key)
 
-        if flag == 0:
-            return responses.RedirectResponse(
-                "/register/?msg=Access-Key-is-Expired-Try-to-Register-again", status_code=status.HTTP_302_FOUND,
-            ) 
+        # if flag == 0:
+        #     return responses.RedirectResponse(
+        #         "/register/?msg=Access-Key-is-Expired-Try-to-Register-again", status_code=status.HTTP_302_FOUND,
+        #     ) 
 
-        else:
-            return responses.RedirectResponse(
-                "/dashboard/?msg=Welcome-{}-To-EM-Sandbox-Dashboard".format(username), status_code=status.HTTP_302_FOUND
-            )
+        # else:
+        #     return responses.RedirectResponse(
+        #         "/dashboard/?msg=Welcome-{}-To-EM-Sandbox-Dashboard".format(username), status_code=status.HTTP_302_FOUND
+        #     )
 
+        return responses.RedirectResponse(
+            "/dashboard/?msg=Welcome-{}-To-EM-Sandbox-Dashboard".format(username), status_code=status.HTTP_302_FOUND
+        )
+        
 
 @app.get("/dashboard/")
 async def dashboard(request: Request, msg: str = None):
@@ -261,15 +265,6 @@ async def inserting_Image(first: str = Form(...), second: str = Form(...)):
     }
 
     r = requests.post('http://a9ce7f382cd8a436399fdd6bcf1c7a8e-319198895.us-west-2.elb.amazonaws.com:8000/namematch/predict/', data=json.dumps(url))
-
-    # res = str(r.json())
-    # print(type(res))
-    # {'Match score': 0.0, 'Match Result': 'No Match', 'Match Reason': 'Names are not Matched'}
-
-    # res = '{"Match name": "wowww"}'
-    # return res
-    # print(r.json())
-    # return r.json()
 
     d = r.json()
 
