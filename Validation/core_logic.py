@@ -76,7 +76,8 @@ def validation(api_key):
     #     return 0
 
     time_diff = current_time - time_created[0]
-    if time_diff.total_seconds() > int(604800):
+    if time_diff.total_seconds() > int(18000):
         return 0
     else:
         return 1
+# 604800

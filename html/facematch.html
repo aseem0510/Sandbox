@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
 
       function submitForm() {
           var formElement = document.getElementById('myForm');
@@ -25,7 +25,79 @@
                 console.error(error);
               });
       }
-    </script>
+    </script> -->
+
+    <style>
+      .table {
+        margin-top: 30px;
+        text-align: center;
+      }
+    </style>
+
+
+    <script type="text/javascript">
+      var flag = true;
+      function submitForm() {
+          var formElement = document.getElementById('myForm');
+          var data = new FormData(formElement);
+          var row = 1;	
+
+          fetch('/facematch/', {
+                method: 'POST',
+                body: data,
+              })
+              .then(response => response.json())
+              .then(data => {
+                  // document.getElementById("response_area").innerHTML = data;
+                  console.log(typeof data);
+                  var display = document.getElementById("response_area");
+
+                  // display.getElementById("test1").innerHTML = data
+                  // display.getElementById("test2").innerHTML = data
+                  // display.getElementById("test3").innerHTML = data
+
+                  var test = 1;
+                  if(flag)
+                  {
+                    flag = false;
+                    test = 2;
+                  }
+                  else{
+                    document.getElementById("response_area").deleteRow(1);
+                    test = 3;
+                  }
+
+                  var newRow = display.insertRow(row);
+
+                  var cell1 = newRow.insertCell(0);
+                  var cell2 = newRow.insertCell(1);
+                  var cell3 = newRow.insertCell(2);
+                  var cell4 = newRow.insertCell(3);
+                  // var cell5 = newRow.insertCell(4);
+
+                  const replaced = data.replaceAll(`'`, `"`);
+                  const obj = JSON.parse(replaced);
+
+                  // cell1.innerHTML = obj.image_from_atm;
+                  // cell2.innerHTML = obj.match_score;
+                  // cell3.innerHTML = obj.cardno;
+                  // cell4.innerHTML = obj.atmid;
+                  // cell5.innerHTML = obj.time;
+
+                  cell1.innerHTML = obj.cardno;
+                  cell2.innerHTML = obj.atmid;
+                  cell3.innerHTML = obj.match_score;
+                  cell4.innerHTML = obj.time;
+                  
+                  // row++;
+    
+              })
+              .catch(error => {
+                console.error(error);
+              });
+      }
+  </script>
+
 
     <script>
 
@@ -89,13 +161,13 @@
               <a class="nav-link" href="/namematch/">Name Match</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/fullcard/">Full card</a>
+              <a class="nav-link" href="/fullcard/">Full card</a>
             </li>
             <li class="nav-item">
                <a class="nav-link" href="/xerox/">Xerox Detection</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" aria-current="page" href="/facematch/">Face Match</a>
+               <a class="nav-link active" aria-current="page" href="/facematch/">Face Match</a>
              </li>
              <li class="nav-item">
                <a class="nav-link" href="/solar/">Roof Top Detection</a>
@@ -161,9 +233,30 @@
          </div>
          <div class="col response">
             <h3>Response</h3>
-            <div id="response_area">
+            <!-- <div id="response_area">
               
-            </div>
+            </div> -->
+            <!-- <table id="response_area">
+              <tr>
+                <th>SandBox Image URL</th>
+                <th>Card Number</th>
+                <th>ATM ID</th>
+                <th>Match Score</th>
+                <th>Request Time</th>
+              </tr>
+
+            </table> -->
+
+            <table class="table" id="response_area">
+              <tr class="table-primary">
+                <th scope="col">Card Number</th>
+                <th scope="col">ATM ID</th>
+                <th scope="col">Match Score</th>
+                <th scope="col">Request Time</th>
+              </tr>
+            </table>
+
+
          </div>
       </div>
     </div>

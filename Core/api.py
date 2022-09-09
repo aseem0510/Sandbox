@@ -72,6 +72,7 @@ def registration(request: Request, msg: str = None):
 
 @app.post("/register/")
 async def register_data(request: Request, f_name: str = Form(...), l_name: str = Form(...), username: str = Form(...), email: str = Form(...), company_name: str = Form(...)):
+    
     f_name = f_name
     l_name = l_name
     username = username
@@ -89,7 +90,7 @@ async def register_data(request: Request, f_name: str = Form(...), l_name: str =
     verify_collection = collection.find({"first_name": f_name, "last_name": l_name, "username": username, "email": email, "company_name": company_name}
     )
 
-    check_flag = 0
+    check_flag = None
 
     for value in verify_collection:
         if (
@@ -99,14 +100,35 @@ async def register_data(request: Request, f_name: str = Form(...), l_name: str =
             and value["company_name"] == company_name
             and value["username"] == username
         ):
-            value["time_created"] == datetime.datetime.now()
-            check_flag = 1
+            # value["time_created"] == datetime.datetime.now()
+            check_flag = str(value["_id"])
 
-    if check_flag == 1:
+    if check_flag:
 
-        return responses.RedirectResponse(
-                "/register/?msg=Already-Registered", status_code=status.HTTP_302_FOUND,
-            )
+        flag = validation(check_flag)
+
+        # not expired
+        if flag:
+
+            return responses.RedirectResponse(
+                    "/register/?msg=Already-Registered", status_code=status.HTTP_302_FOUND,
+                )
+        
+        else:
+
+            # Updating based on this
+            filter = {"first_name": f_name, "last_name": l_name, "username": username, "email": email, "company_name": company_name}
+            
+            # Values to be updated.
+            newvalues = { "$set": { 'time_created': datetime.datetime.now() } }
+            
+            # Using update_one() method for single
+            # updation.
+            collection.update_one(filter, newvalues)
+
+            return responses.RedirectResponse(
+                "/login/?msg=Access-key-updated-use-your-previous-key-for-login", status_code=status.HTTP_302_FOUND
+            ) 
 
     else:
 
@@ -218,6 +240,7 @@ async def inserting_Image(image_file: UploadFile = File(...)):
     r = requests.post('http://ad26e8808900b4e73adcbd73a6c212ce-613381922.us-west-2.elb.amazonaws.com:8000/idClassification/', data=json.dumps(url))
 
     res = str(r.json())
+    print(res)
     return res
 
 
@@ -239,9 +262,23 @@ async def inserting_Image(first: str = Form(...), second: str = Form(...)):
 
     r = requests.post('http://a9ce7f382cd8a436399fdd6bcf1c7a8e-319198895.us-west-2.elb.amazonaws.com:8000/namematch/predict/', data=json.dumps(url))
 
-    res = str(r.json())
-    return res
+    # res = str(r.json())
+    # print(type(res))
+    # {'Match score': 0.0, 'Match Result': 'No Match', 'Match Reason': 'Names are not Matched'}
 
+    # res = '{"Match name": "wowww"}'
+    # return res
+    # print(r.json())
+    # return r.json()
+
+    d = r.json()
+
+    new_res = dict()
+    for i in d:
+        temp = i.replace(" ", "")
+        new_res[temp] = d[i]
+
+    return str(new_res)
 
 
 @app.get("/fullcard/", response_class=HTMLResponse)

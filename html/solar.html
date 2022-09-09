@@ -6,8 +6,16 @@
     <title>Roof Top Detection</title>
     <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    
-    <script type="text/javascript">
+    <style>
+      #img-rounded-border {
+        /* border:10px solid red;
+        border-radius:10px; */
+        width: 520px;
+        height: 290px;
+        margin-top: 18px;
+      }
+    </style>
+    <!-- <script type="text/javascript">
 
       function submitForm() {
           var formElement = document.getElementById('myForm');
@@ -25,7 +33,100 @@
                 console.error(error);
               });
       }
-    </script>
+    </script> -->
+
+
+    <script type="text/javascript">
+      var flag = true;
+      function submitForm() {
+          var formElement = document.getElementById('myForm');
+          var data = new FormData(formElement);
+          var row = 1;	
+
+          fetch('/solar/', {
+                method: 'POST',
+                body: data,
+              })
+              .then(response => response.json())
+              .then(data => {
+                  // document.getElementById("response_area").innerHTML = data;
+
+
+                  // console.log(typeof data);
+                  var display = document.getElementById("response_area");
+
+
+                  // display.getElementById("test1").innerHTML = data
+                  // display.getElementById("test2").innerHTML = data
+                  // display.getElementById("test3").innerHTML = data
+
+
+
+                  var test = 1;
+                  if(flag)
+                  {
+                    flag = false;
+                    test = 2;
+                  }
+                  else{
+                    document.getElementById("response_area").deleteRow(1);
+                    test = 3;
+                  }
+
+                  var newRow = display.insertRow(row);
+
+                  var cell1 = newRow.insertCell(0);
+                  // var cell2 = newRow.insertCell(1);
+
+
+                  
+                  const replaced = data.replaceAll(`'`, `"`);
+                  const obj = JSON.parse(replaced);
+
+
+                  // cell1.innerHTML = obj.predicted_mask;
+
+
+                  // var img = new Image();
+                  // img.src = obj.predicted_mask;
+                  // document.getElementById("img_home").innerHTML.appendChild(img);
+
+
+                  // const testing = document.getElementById("testing");
+
+
+                  const img = document.createElement("img");
+                  img.src = obj.predicted_mask;
+                  img.setAttribute("id", "img-rounded-border");
+                  
+                  // document.body.appendChild(img);
+                  
+                  const menu = document.querySelector('#testing');
+                  menu.replaceChildren();
+                  menu.appendChild(img)
+
+                  cell1.innerHTML = None
+
+                  // cell2.innerHTML.appen = img;
+
+                  // const img = new Image(100, 200); // width, height
+                  // img.src = obj.predicted_mask;
+                  // document.body.appendChild(img);
+
+
+
+
+
+                  // row++;
+    
+              })
+              .catch(error => {
+                console.error(error);
+              });
+      }
+  </script>
+
+
 
     <script>
 
@@ -98,7 +199,7 @@
                <a class="nav-link" href="/facematch/">Face Match</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" aria-current="page" href="/solar/">Roof Top Detection</a>
+               <a class="nav-link active" aria-current="page" href="/solar/">Roof Top Detection</a>
              </li>
              <li class="nav-item">
                <a class="nav-link" href="/spoof/">Spoof Detection</a>
@@ -154,7 +255,16 @@
          </div>
          <div class="col response">
             <h3>Response</h3>
-            <div id="response_area"></div>
+            <!-- <div id="response_area"></div> -->
+            <table id="response_area">
+              <tr id="testing">
+        
+              </tr>
+            </table>
+            <!-- <div id="img_home"></div> -->
+            <!-- <div id="testing"> -->
+
+            </div>
          </div>
       </div>
     </div>
